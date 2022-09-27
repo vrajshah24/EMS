@@ -27,7 +27,7 @@ public class LoginService {
             switch (choice)
             {
                 case 1:
-                    System.out.println("you are now in admin login ");
+                    System.out.println("----------------you are now in admin login-------------");
                     System.out.println("Please enter your USERNAME : ");
                     userName = login.nextLine();
                     System.out.println("Please enter your PASSWORD : ");
