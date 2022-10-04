@@ -1,5 +1,6 @@
 package com.example.login;
 
+import com.example.CSVHelper;
 import com.example.admin.AdminService;
 
 import java.util.Scanner;
@@ -27,13 +28,27 @@ public class LoginService {
             switch (choice)
             {
                 case 1:
+                    CSVHelper adminhelper =  new CSVHelper();
+                    adminhelper.dataReader("src/Admin.csv");
                     System.out.println("you are now in admin login ");
                     System.out.println("Please enter your USERNAME : ");
                     userName = login.nextLine();
                     System.out.println("Please enter your PASSWORD : ");
                     passWord = login.nextLine();
-                    LoginModel lm = new LoginModel(userName,passWord);
-                    if( adminLogin(lm) == 1)
+                    LoginModel adminlm = new LoginModel(userName,passWord);
+                    if( adminLogin(adminlm) == 1)
+                    {
+                        System.out.println("you are now logged in as Admin");
+                        AdminService.main();
+                    }
+                case 2:
+                    System.out.println("you are now in employee login ");
+                    System.out.println("Please enter your USERNAME : ");
+                    userName = login.nextLine();
+                    System.out.println("Please enter your PASSWORD : ");
+                    passWord = login.nextLine();
+                    LoginModel employeelm = new LoginModel(userName,passWord);
+                    if( adminLogin(employeelm) == 1)
                     {
                         System.out.println("you are now logged in as Admin");
                         AdminService.main();
