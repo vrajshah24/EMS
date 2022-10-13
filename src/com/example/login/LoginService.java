@@ -2,16 +2,42 @@ package com.example.login;
 
 import com.example.CSVHelper;
 import com.example.admin.AdminService;
+import com.example.employee.EmployeeService;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class LoginService {
     protected static int adminLogin(LoginModel data){
+        CSVHelper adminhelper  = new CSVHelper();
         String userName;
         String passWord;
         userName = data.userName;
         passWord = data.passWord;
-        return 1;
+        List<List<String>> res =  adminhelper.dataReader("src/Admin.csv");
+        for(int i = 0;i<res.toArray().length;i++){
+            System.out.println(data.userName.equals(res.get(i).get(0))&& data.passWord.equals(res.get(i).get(1)));
+
+            if(data.userName.equals(res.get(i).get(0))&& data.passWord.equals(res.get(i).get(1))){
+                System.out.println(res.get(0).get(0));
+                return 1;
+            }
+        }
+        return 0;
+    }
+    protected static int employeeLogin(LoginModel data){
+        CSVHelper employeehelper  = new CSVHelper();
+        String userName;
+        String passWord;
+        userName = data.userName;
+        passWord = data.passWord;
+        List<List<String>> res =  employeehelper.dataReader("src/Employee.csv");
+        for(int i = 0;i<res.toArray().length;i++){
+            if(userName == res.get(i).get(0) && passWord == res.get(i).get(1)){
+                return 1;
+            }
+        }
+        return 0;
     }
     public static void main() {
         int choice=-1;
@@ -29,7 +55,6 @@ public class LoginService {
             {
                 case 1:
                     CSVHelper adminhelper =  new CSVHelper();
-                    adminhelper.dataReader("src/Admin.csv");
                     System.out.println("you are now in admin login ");
                     System.out.println("Please enter your USERNAME : ");
                     userName = login.nextLine();
@@ -41,6 +66,10 @@ public class LoginService {
                         System.out.println("you are now logged in as Admin");
                         AdminService.main();
                     }
+                    else{
+                        System.out.println("Incorrect Username or Password");
+                        break;
+                    }
                 case 2:
                     System.out.println("you are now in employee login ");
                     System.out.println("Please enter your USERNAME : ");
@@ -48,10 +77,13 @@ public class LoginService {
                     System.out.println("Please enter your PASSWORD : ");
                     passWord = login.nextLine();
                     LoginModel employeelm = new LoginModel(userName,passWord);
-                    if( adminLogin(employeelm) == 1)
+                    if( employeeLogin(employeelm) == 1)
                     {
-                        System.out.println("you are now logged in as Admin");
-                        AdminService.main();
+                        System.out.println("you are now logged in as Employee");
+                        EmployeeService.main();
+                    }
+                    else{
+                        System.out.println("Incorrect Username or Password");
                     }
             }
         }while (choice !=0);
