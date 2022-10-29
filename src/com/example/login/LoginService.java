@@ -4,6 +4,8 @@ import com.example.CSVHelper;
 import com.example.admin.AdminService;
 import com.example.employee.EmployeeService;
 
+import java.io.BufferedWriter;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Scanner;
 
@@ -16,10 +18,7 @@ public class LoginService {
         passWord = data.passWord;
         List<List<String>> res =  adminhelper.dataReader("src/Admin.csv");
         for(int i = 0;i<res.toArray().length;i++){
-            System.out.println(data.userName.equals(res.get(i).get(0))&& data.passWord.equals(res.get(i).get(1)));
-
             if(data.userName.equals(res.get(i).get(0))&& data.passWord.equals(res.get(i).get(1))){
-                System.out.println(res.get(0).get(0));
                 return 1;
             }
         }

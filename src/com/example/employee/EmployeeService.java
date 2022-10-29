@@ -1,5 +1,7 @@
 package com.example.employee;
 
+import com.example.admin.AddEmployee;
+
 import java.util.Scanner;
 
 public class EmployeeService {
@@ -15,8 +17,8 @@ public class EmployeeService {
             choice = s.nextInt();
             switch(choice)
             {
-               // case 1 :
-
+                case 1 :
+                     AddEmployee.main();
             }
         }while (choice !=4);
     }
