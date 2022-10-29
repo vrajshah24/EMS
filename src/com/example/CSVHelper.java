@@ -102,8 +102,8 @@ public class CSVHelper {
                     pw.print(userName+','+passWord+','+dob+','+Phno+','+salary);
                 }
             }
-            x.close();
             pw.flush();
+            x.close();
             pw.close();
             oldFile.delete();
             File dump  = new File(filePath);
