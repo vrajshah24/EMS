@@ -7,7 +7,6 @@ public class AdminService {
         int choice= -1;
         Scanner s = new Scanner(System.in);
         do{
-
            System.out.println("1.) Add User");
            System.out.println("2.) Add Admin");
            System.out.println("3.) Edit User");
@@ -26,6 +25,8 @@ public class AdminService {
                case 5:
                     creditSalary.main();
                     break;
+               case 6:
+                    debitSalary.main();
            }
        }while (choice !=7);
     }
