@@ -4,6 +4,8 @@ import com.example.CSVHelper;
 import com.example.admin.AdminService;
 import com.example.employee.EmployeeService;
 
+import java.io.BufferedWriter;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Scanner;
 
@@ -16,10 +18,7 @@ public class LoginService {
         passWord = data.passWord;
         List<List<String>> res =  adminhelper.dataReader("src/Admin.csv");
         for(int i = 0;i<res.toArray().length;i++){
-            System.out.println(data.userName.equals(res.get(i).get(0))&& data.passWord.equals(res.get(i).get(1)));
-
             if(data.userName.equals(res.get(i).get(0))&& data.passWord.equals(res.get(i).get(1))){
-                System.out.println(res.get(0).get(0));
                 return 1;
             }
         }
@@ -33,7 +32,7 @@ public class LoginService {
         passWord = data.passWord;
         List<List<String>> res =  employeehelper.dataReader("src/Employee.csv");
         for(int i = 0;i<res.toArray().length;i++){
-            if(userName == res.get(i).get(0) && passWord == res.get(i).get(1)){
+            if(userName.equals(res.get(i).get(0)) && passWord.equals(res.get(i).get(1))){
                 return 1;
             }
         }
@@ -80,7 +79,7 @@ public class LoginService {
                     if( employeeLogin(employeelm) == 1)
                     {
                         System.out.println("you are now logged in as Employee");
-                        EmployeeService.main();
+                        EmployeeService.main(userName);
                     }
                     else{
                         System.out.println("Incorrect Username or Password");
